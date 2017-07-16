@@ -1,5 +1,15 @@
 module.exports={
 	debug:true,
-	mongoUri:'mongodb://localhost/my-project',
-	sessionSecret:'dev_secret_key'
+	mongoUri:'mongodb://localhost/myProject2',
+	sessionSecret:'dev_secret_key',
+	facebook:{
+		clientID:'665667033628247',
+		clientSecret:'153cfdc1fd512a0a9ec941780199a47b',
+		callbackURL:'http://localhost:3000/oauth/facebook/callback'
+	},
+	google:{
+		clientID:'40957248477-np9cv78dskveqtlvvks3tirehabes37m.apps.googleusercontent.com',
+		clientSecret:'FK_IJkn-ahWEkaen3M9IAVSM',
+		callbackURL:'http://localhost:3000/oauth/google/callback'
+	}
 };

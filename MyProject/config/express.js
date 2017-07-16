@@ -1,9 +1,11 @@
 var express = require('express');
 var config = require('./config');
 var morgan=require('morgan');
+var flash=require('connect-flash');
 var sass=require('node-sass-middleware');
 var validator=require('express-validator');
 var session=require('express-session');
+var passport=require('passport');
 var compression =require('compression');
 var bodyParser=require('body-parser');
 module.exports=function () {
@@ -13,11 +15,14 @@ module.exports=function () {
 	}else{
 		app.use(compression);
 	}
+	app.use(flash());
 	app.use(session({
 		secret: config.sessionSecret,
 		resave: false,
 		saveUninitialized:true
 	}));
+	app.use(passport.initialize());
+	app.use(passport.session());
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
@@ -27,7 +32,7 @@ module.exports=function () {
 	app.set('view engine','jade');
 	require('../app/routes/index.routes')(app);
 	require('../app/routes/user.routes')(app);
-		app.use(sass({
+	app.use(sass({
 		src:'./sass',
 		dest:'./public/css',
 		outputStyle: 'compressed',
